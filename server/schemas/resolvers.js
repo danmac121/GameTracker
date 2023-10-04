@@ -110,7 +110,8 @@ const resolvers = {
     //add a game to the User's 'Games' page
 
     savedGames: async (parent, { gameData }, context) => {
-
+      console.log(gameData)
+      console.log(context.user)
       if (context.user) {
 
         const update = await User.findOneAndUpdate(

@@ -36,7 +36,7 @@ mutation AddPlatform($platform: String!) {
     savedGames {
       _id
       gameId
-      title
+      name
       description
       image
       genre
@@ -60,7 +60,7 @@ mutation SavedGames($gameData: GameInput!) {
     savedGames {
       _id
       gameId
-      title
+      name
       description
       image
       genre
@@ -85,7 +85,7 @@ mutation RemoveGame($gameId: ID!) {
     savedGames {
       _id
       gameId
-      title
+      name
       description
       image
       genre
@@ -104,7 +104,7 @@ mutation Mutation($gameId: Int!, $completionTasks: [String]) {
   addTask(gameId: $gameId, completionTasks: $completionTasks) {
     savedGames {
       gameId
-      title
+      name
       description
       completionTasks
       _id
