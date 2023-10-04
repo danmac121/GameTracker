@@ -10,7 +10,7 @@ const gameSchema = new Schema({
   },
   // saved book id from GB API
   gameId: {
-    type: String,
+    type: Number,
     required: true,
   },
     deck: {
@@ -42,5 +42,5 @@ const Platforms = new Schema({
   }
 })
 
-module.exports = gameSchema;
-module.exports = Platforms;
+module.exports = gameSchema
+
