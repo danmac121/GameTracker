@@ -40,15 +40,15 @@ const resolvers = {
 
     //Add a platform to the user profile
 
-    addPlatform: async (parent, {platform}, context) => {
+    addPlatform: async (parent, { platform }, context) => {
       if (context.user) {
         try {
           const updatedUser = await User.findOneAndUpdate(
             { _id: context.user._id },
-            { $addToSet: {platforms: platform } },
+            { $addToSet: { platforms: platform } },
             { new: true }
-            );
-            return updatedUser;
+          );
+          return updatedUser;
         } catch (error) {
           // Handle any database or other errors here
           console.log(error)
@@ -60,16 +60,25 @@ const resolvers = {
     },
     //add a completion task to the selected game
 
-    addTask: async (parent, {completionTasks, gameId}, context) => {
+    addTask: async (parent, { completionTasks, gameId }, context) => {
+
       if (context.user) {
-       
+
         const update = await User.findOneAndUpdate(
 
-          { _id: context.user._id },
-          { $addToSet: { savedGames: completionTasks } },
-          { new: true}
+          {
+            _id: context.user._id,
+            "savedGames.gameId": gameId
+          },
+          {
+            $addToSet: {
+              "savedGames.$.completionTasks": completionTasks
+            }
+          },
+          { new: true }
         ).populate('savedGames')
         return update;
+
       }
       throw AuthenticationError;
 
@@ -77,17 +86,17 @@ const resolvers = {
 
 
     //add a game to the User's 'Games' page
-   
+
     savedGames: async (parent, { gameData }, context) => {
-  
+
       if (context.user) {
-       
+
         const update = await User.findOneAndUpdate(
           { _id: context.user._id },
           { $addToSet: { savedGames: gameData } },
-          { new: true}
+          { new: true }
         )
-        
+
         return update;
       }
       throw AuthenticationError;
@@ -99,12 +108,12 @@ const resolvers = {
     //remove a game from savedbooks
     removeGame: async (parent, { gameId }, context) => {
       if (context.user) {
-       
 
-       const removeGame = await User.findOneAndUpdate(
+
+        const removeGame = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedGames: {gameId} } },
-          { new: true}
+          { $pull: { savedGames: { gameId } } },
+          { new: true }
         );
 
         return removeGame;

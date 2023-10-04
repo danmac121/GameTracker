@@ -98,3 +98,25 @@ mutation RemoveGame($gameId: ID!) {
 }
 `
 
+export const ADD_TASK = gql`
+
+mutation Mutation($gameId: Int!, $completionTasks: [String]) {
+  addTask(gameId: $gameId, completionTasks: $completionTasks) {
+    savedGames {
+      gameId
+      title
+      description
+      completionTasks
+      _id
+      image
+      genre
+      gameplayStatus
+      releaseDate
+      platform
+    }
+  }
+}
+
+
+
+`
