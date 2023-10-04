@@ -1,5 +1,9 @@
+const fetch = require('node-fetch');
 const { User, Book } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
+const API_ENDPOINT = 'https://www.giantbomb.com/api/search/';
+const API_KEY = process.env.API_KEY;
+console.log(API_KEY)
 
 const resolvers = {
   Query: {
@@ -10,8 +14,25 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-  },
 
+    searchGames: async (_, { query }) => {
+      console.log("hitting searchGames")
+      const response =await fetch(`${API_ENDPOINT}?api_key=${API_KEY}&format=json&query=${query}&resources=game`, {
+        headers: {
+            'Authorization': `Bearer ${API_KEY}`
+        }});
+        const data = await response.json();
+        const  games =  data.results.map(game => ({
+          id: game.id,
+          name: game.name,
+          deck: game.deck,
+          image: game.image.medium_url,
+          platforms: game.platforms.map(platforms => ({ name: platforms.name }))
+        }));
+        console.log(games);
+        return games;
+  },
+  },
   Mutation: {
     //create a new user and sign a token for that user
     addUser: async (parent, { username, email, password }) => {

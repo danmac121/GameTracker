@@ -18,6 +18,22 @@ type User {
     link: String
   }
 
+  type Game{
+    id: ID!
+    name: String!
+    deck: String!
+    image: String!
+    platforms: [Platforms]!
+  }
+
+  type Platforms {
+    name: String!
+  }
+
+  type Query {
+    searchGames(query: String!): [Game]
+  }
+
   input SavedBookInput {
     bookId: String!
     title: String!

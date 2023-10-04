@@ -17,3 +17,18 @@ export const QUERY_ME = gql`
   }
 }
 `;
+
+export const SEARCH_GAMES = gql`
+query searchGames($query: String!) {
+  searchGames(query: $query) {
+    id
+    name
+    deck
+    image
+    platforms {
+      name
+    }
+  }
+}
+`;
+
