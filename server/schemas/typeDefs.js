@@ -27,10 +27,10 @@ type User {
   input GameInput {
     _id: ID
     gameId: Int
-    title: String!
-    description: String
+    name: String!
+    deck: String
     image: String
-    genre: String
+   
     gameplayStatus: String
     releaseDate: String
     platform: String
@@ -40,17 +40,21 @@ type User {
   type Game {
     _id: ID
     gameId: Int!
-    title: String!
-    description: String
+    name: String!
+    deck: String
     image: String
-    genre: String
+   
     gameplayStatus: String
     releaseDate: String
-    platform: String
+    platforms: [Platforms]!
     completionTasks: [String]
   }
-
-
+  type Platforms {
+    name: String!
+  }
+  type Query {
+    searchGames(query: String!): [Game]
+  }
 
   type Query {
     me: User

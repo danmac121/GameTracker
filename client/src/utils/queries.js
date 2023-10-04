@@ -22,5 +22,20 @@ export const GET_ME = gql`
     }
   }
 }
+`;
 
-`
+export const SEARCH_GAMES = gql`
+query searchGames($query: String!) {
+  searchGames(query: $query) {
+    gameId
+    name
+    deck
+    image
+    releaseDate 
+    platforms {
+      name
+    }
+  }
+}
+`;
+
