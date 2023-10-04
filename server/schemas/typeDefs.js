@@ -5,9 +5,12 @@ type Auth {
   user: User
 }
 
-type userTasks {
-  user: User
-  game: Game
+
+enum GameplayStatus {
+  IN_QUE
+  CURRENTLY_PLAYING
+  CURRENTLY_COMPLETING
+  COMPLETED
 }
 
 
@@ -36,7 +39,7 @@ type User {
 
   type Game {
     _id: ID
-    gameId: String!
+    gameId: Int!
     title: String!
     description: String
     image: String
@@ -44,7 +47,7 @@ type User {
     gameplayStatus: String
     releaseDate: String
     platform: String
-    completionTasks: [String]!
+    completionTasks: [String]
   }
 
 
@@ -58,7 +61,7 @@ type User {
     login(email: String!, password: String!): Auth
     addPlatform(platform:String!): User
     savedGames(gameData: GameInput!): User
-    addTask(gameId: String!, completionTasks: [String]!): userTasks
+    addTask(gameId: Int!, completionTasks: [String]): User
     removeGame(gameId: ID!): User
 
   }

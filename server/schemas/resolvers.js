@@ -42,15 +42,12 @@ const resolvers = {
 
     addPlatform: async (parent, {platform}, context) => {
       if (context.user) {
-       console.log(context.user._id)
         try {
-          console.log(platform)
           const updatedUser = await User.findOneAndUpdate(
             { _id: context.user._id },
             { $addToSet: {platforms: platform } },
             { new: true }
             );
-            console.log(updatedUser)
             return updatedUser;
         } catch (error) {
           // Handle any database or other errors here
@@ -63,16 +60,15 @@ const resolvers = {
     },
     //add a completion task to the selected game
 
-    addTask: async (parent, {completionTasks}, context) => {
-
+    addTask: async (parent, {completionTasks, gameId}, context) => {
       if (context.user) {
        
         const update = await User.findOneAndUpdate(
+
           { _id: context.user._id },
-          { $push: { savedGames: completionTasks } },
+          { $addToSet: { savedGames: completionTasks } },
           { new: true}
         ).populate('savedGames')
-        
         return update;
       }
       throw AuthenticationError;

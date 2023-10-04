@@ -1,0 +1,100 @@
+import {gql} from '@apollo/client'
+
+export const ADD_USER = gql`
+    mutation addUser($username: String!, $email: String!, $password: String!) {
+  addUser(username: $username, email: $email, password: $password) {
+    token
+    user {
+       username
+      _id
+    }
+  }
+}
+`
+
+export const LOGIN_USER = gql`
+mutation login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    token
+    user {
+      _id
+      username
+    }
+  }
+}
+`;
+
+export const ADD_PLATFORM = gql`
+mutation AddPlatform($platform: String!) {
+  addPlatform(platform: $platform) {
+    _id
+    username
+    email
+    password
+    gameCount
+    platforms
+    savedGames {
+      _id
+      gameId
+      title
+      description
+      image
+      genre
+      gameplayStatus
+      releaseDate
+      platform
+      completionTasks
+    }
+  }
+}
+`
+export const ADD_GAME = gql`
+mutation SavedGames($gameData: GameInput!) {
+  savedGames(gameData: $gameData) {
+    _id
+    username
+    email
+    password
+    gameCount
+    platforms
+    savedGames {
+      _id
+      gameId
+      title
+      description
+      image
+      genre
+      gameplayStatus
+      releaseDate
+      platform
+      completionTasks
+    }
+  }
+}
+`
+
+export const REMOVE_GAME = gql`
+mutation RemoveGame($gameId: ID!) {
+  removeGame(gameId: $gameId) {
+    _id
+    username
+    email
+    password
+    gameCount
+    platforms
+    savedGames {
+      _id
+      gameId
+      title
+      description
+      image
+      genre
+      gameplayStatus
+      releaseDate
+      platform
+      completionTasks
+    }
+  }
+}
+`
+
