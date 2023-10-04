@@ -39,11 +39,10 @@ type User {
 
   type Game {
     _id: ID
-    gameId: Int!
-    name: String!
+    gameId: Int
+    name: String
     deck: String
     image: String
-   
     gameplayStatus: String
     releaseDate: String
     platforms: [Platforms]!
