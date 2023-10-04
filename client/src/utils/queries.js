@@ -1,18 +1,24 @@
-import { gql } from '@apollo/client';
+import {gql} from '@apollo/client'
 
-export const QUERY_ME = gql`
- query me {
+export const GET_ME = gql`
+    {
   me {
     _id
-    bookCount
-    savedBooks {
+    username
+    email
+    gameCount
+    platforms
+    savedGames {
       _id
-      authors
-      bookId
+      gameId
       description
-      image
-      link
       title
+      image
+      genre
+      gameplayStatus
+      releaseDate
+      platform
+      completionTasks
     }
   }
 }
@@ -21,10 +27,11 @@ export const QUERY_ME = gql`
 export const SEARCH_GAMES = gql`
 query searchGames($query: String!) {
   searchGames(query: $query) {
-    id
+    gameId
     name
     deck
     image
+    releaseDate 
     platforms {
       name
     }

@@ -1,51 +1,59 @@
 const typeDefs = `
+
+type Auth {
+  token: ID!
+  user: User
+}
+
+
+enum GameplayStatus {
+  IN_QUE
+  CURRENTLY_PLAYING
+  CURRENTLY_COMPLETING
+  COMPLETED
+}
+
+
 type User {
     _id: ID
     username: String!
     email: String!
     password: String!
-    bookCount: Int
-    savedBooks: [Book]
+    gameCount: Int
+    platforms: [String]
+    savedGames: [Game]
   }
 
-  type Book {
+  input GameInput {
     _id: ID
-    bookId: String!
-    title: String!
-    authors: [String]
-    description: String!
-    image: String
-    link: String
-  }
-
-  type Game{
-    id: ID!
+    gameId: Int
     name: String!
-    deck: String!
-    image: String!
-    platforms: [Platforms]!
+    deck: String
+    image: String
+   
+    gameplayStatus: String
+    releaseDate: String
+    platform: String
+    completionTasks: [String]
   }
 
+  type Game {
+    _id: ID
+    gameId: Int!
+    name: String!
+    deck: String
+    image: String
+   
+    gameplayStatus: String
+    releaseDate: String
+    platforms: [Platforms]!
+    completionTasks: [String]
+  }
   type Platforms {
     name: String!
   }
-
   type Query {
     searchGames(query: String!): [Game]
-  }
-
-  input SavedBookInput {
-    bookId: String!
-    title: String!
-    authors: [String]
-    description: String!
-    image: String
-    link: String
-  }
-
-  type Auth {
-    token: ID!
-    user: User
   }
 
   type Query {
@@ -55,8 +63,11 @@ type User {
   type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
     login(email: String!, password: String!): Auth
-    saveBook(savedData: SavedBookInput!): User
-    removeBook(bookId: ID!): User
+    addPlatform(platform:String!): User
+    savedGames(gameData: GameInput!): User
+    addTask(gameId: Int!, completionTasks: [String]): User
+    removeGame(gameId: ID!): User
+
   }
 `;
 

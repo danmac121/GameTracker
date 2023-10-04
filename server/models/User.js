@@ -22,6 +22,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    platforms: {
+      type:[String],
+      required: true,
+    },
     // set savedBooks to be an array of data that adheres to the bookSchema
     savedGamess: [gameSchema],
   },

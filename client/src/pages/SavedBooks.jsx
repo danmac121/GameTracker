@@ -8,11 +8,11 @@ import {
   Col
 } from 'react-bootstrap';
 import { useQuery, useMutation } from '@apollo/client';
-import { QUERY_ME } from '../utils/queries'
+// import { QUERY_ME } from '../utils/queries'
 import { getMe, deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
-import { removeBookId } from '../utils/localStorage';
-import { REMOVE_BOOK } from '../utils/mutations';
+// import { removeBookId } from '../utils/localStorage';
+// import { REMOVE_BOOK } from '../utils/mutations';
 
 const SavedBooks = () => {
  const { loading, data }= useQuery(QUERY_ME);

@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const { User, Book } = require('../models');
+const { User, Game } = require('../models');
 const { signToken, AuthenticationError } = require('../utils/auth');
 const API_ENDPOINT = 'https://www.giantbomb.com/api/search/';
 const API_KEY = process.env.API_KEY;
@@ -23,10 +23,11 @@ const resolvers = {
         }});
         const data = await response.json();
         const  games =  data.results.map(game => ({
-          id: game.id,
+          gameId: game.id,
           name: game.name,
           deck: game.deck,
           image: game.image.medium_url,
+          releaseDate: game.original_release_date,
           platforms: game.platforms.map(platforms => ({ name: platforms.name }))
         }));
         console.log(games);
@@ -58,34 +59,86 @@ const resolvers = {
 
       return { token, user };
     },
-    //if user is logged in, save a book to user's saved books
-    saveBook: async (parent, { savedData }, context) => {
-      console.log("hitting saveBook")
+
+    //Add a platform to the user profile
+
+    addPlatform: async (parent, { platform }, context) => {
       if (context.user) {
-       
+        try {
+          const updatedUser = await User.findOneAndUpdate(
+            { _id: context.user._id },
+            { $addToSet: { platforms: platform } },
+            { new: true }
+          );
+          return updatedUser;
+        } catch (error) {
+          // Handle any database or other errors here
+          console.log(error)
+          throw new Error("Unable to update user's platforms.");
+        }
+      } else {
+        throw new AuthenticationError('User is not authenticated.');
+      }
+    },
+    //add a completion task to the selected game
+
+    addTask: async (parent, { completionTasks, gameId }, context) => {
+
+      if (context.user) {
+
+        const update = await User.findOneAndUpdate(
+
+          {
+            _id: context.user._id,
+            "savedGames.gameId": gameId
+          },
+          {
+            $addToSet: {
+              "savedGames.$.completionTasks": completionTasks
+            }
+          },
+          { new: true }
+        ).populate('savedGames')
+        return update;
+
+      }
+      throw AuthenticationError;
+
+    },
+
+
+    //add a game to the User's 'Games' page
+
+    savedGames: async (parent, { gameData }, context) => {
+
+      if (context.user) {
+
         const update = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { savedBooks: savedData } },
-          { new: true}
+          { $addToSet: { savedGames: gameData } },
+          { new: true }
         )
-        
+
         return update;
       }
       throw AuthenticationError;
-      ('You need to be logged in!');
-    },
-    //remove a book from savedbooks
-    removeBook: async (parent, { bookId }, context) => {
-      if (context.user) {
-       
 
-       const removeBook = await User.findOneAndUpdate(
+    },
+
+
+
+    //remove a game from savedbooks
+    removeGame: async (parent, { gameId }, context) => {
+      if (context.user) {
+
+
+        const removeGame = await User.findOneAndUpdate(
           { _id: context.user._id },
-          { $pull: { savedBooks: {bookId} } },
-          { new: true}
+          { $pull: { savedGames: { gameId } } },
+          { new: true }
         );
 
-        return removeBook;
+        return removeGame;
       }
       throw AuthenticationError;
     }
