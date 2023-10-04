@@ -30,7 +30,6 @@ type User {
     name: String!
     deck: String
     image: String
-   
     gameplayStatus: String
     releaseDate: String
     platform: String
@@ -43,7 +42,6 @@ type User {
     name: String!
     deck: String
     image: String
-   
     gameplayStatus: String
     releaseDate: String
     platforms: [Platforms]!

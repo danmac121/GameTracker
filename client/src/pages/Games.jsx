@@ -20,7 +20,7 @@ const Games = () => {
     <h1 className="bg-dark p-3 text-light text-center">My Games</h1>
       <Container className="mb-5 mt-3">
         <Row>
-          <Col md="4" classNameName="p-3">
+          <Col md="4" className="p-3">
             <h2 className="bg-dark text-light text-center">In progress</h2>
             <ul className="list-group list-group-flush">
               <li className="list-group-item">Cras justo odio</li>
@@ -31,7 +31,7 @@ const Games = () => {
             </ul>
           </Col>
 
-          <Col md="4" classNameName="p-3">
+          <Col md="4" className="p-3">
             <h2 className="bg-dark text-light text-center">Next Up</h2>
             <ul className="list-group list-group-flush">
               <li className="list-group-item">Cras justo odio</li>
@@ -42,7 +42,7 @@ const Games = () => {
             </ul>
           </Col>
 
-          <Col md="4" classNameName="p-3">
+          <Col md="4" className="p-3">
             <h2 className="bg-dark text-light text-center">Completed</h2>
             <ul className="list-group list-group-flush">
               <li className="list-group-item">Cras justo odio</li>
@@ -56,7 +56,7 @@ const Games = () => {
       </Container>
 
       <Container>
-        <Col classNameName="p-5">
+        <Col className="p-5">
         <h4 className="bg-dark text-light text-center">Upcoming</h4>
         </Col>
       </Container>
