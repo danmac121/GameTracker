@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Col, Card, Button } from 'react-bootstrap';
 import Auth from '../utils/auth.js';
 import {SEARCH_GAMES} from '../utils/queries';
@@ -7,11 +7,19 @@ import {useLazyQuery} from '@apollo/client';
 function SearchGames() {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
-  const [searchGames, {data}] = useLazyQuery(SEARCH_GAMES, {
-      variables: { query },});
+  const [searchGames, {data}] = useLazyQuery(SEARCH_GAMES);
+    const inputRef = useRef(null);
+      useEffect(() => {
+        if (data && data.searchGames) {
+          setResults(data.searchGames);
+        }
+      }, [data]);
+      
   const handleSearch = async () => {
     try {
-      searchGames();
+      const inputValue = inputRef.current.value;
+      setQuery(inputValue);
+      searchGames({variables: {query: inputValue}});
   
       console.log(data)
     
@@ -27,45 +35,48 @@ console.log(data)
         <input
           type="text"
           value={query}
+          ref={inputRef}
           onChange={e => setQuery(e.target.value)}
           placeholder="Search for a game..."
           
         />
         <button onClick={handleSearch}>Search</button>
 
-        <ul>
-          {results.map(game => (
-            <li key={game.id}>{game.name}</li>
-          ))}
-        </ul>
       </div>
       <div>
         {results.map((game) => {
-          return (
-            <Col md="4" key={game.id}>
-              <Card border='dark'>
-                {game.image ? (
-                  <Card.Img src={game.image.medium_url} alt={`The cover for ${game.title}`} variant='top' />
-                ) : null}
-                <Card.Body>
-                  <Card.Title>{game.title}</Card.Title>
+          for (let i = 0; i < results.length; i++) {
+            return (
+              <Col md="4" key={game.id}>
+                <Card border='dark'>
                   
-                  <Card.Text>{game.deck} {game.platforms.name}</Card.Text>
+                 
+                    <Card.Img src={game.image} alt={`The cover for ${game.name}`} variant='top' />
                   
-                  {/* {Auth.loggedIn() && (
-                    <Button
-                      disabled={savedBookIds?.some((savedBookId) => savedBookId === game.id)}
-                      className='btn-block btn-info'
-                      onClick={() => handleSaveBook(game.id)}>
-                      {savedBookIds?.some((savedBookId) => savedBookId === game.id)
-                        ? 'This book has already been saved!'
-                        : 'Save this Book!'}
-                    </Button>
-                  )} */}
-                </Card.Body>
-              </Card>
-            </Col>
-          );
+                  <Card.Body>
+                    <Card.Title>{game.name}</Card.Title>
+                    
+                    <Card.Text>{game.deck} </Card.Text>
+                    <Card.Text> Platforms: {game.platforms.map(platform => platform.name).join(', ')}</Card.Text>
+                    <Card.Text>Released: {game.releaseDate} </Card.Text>
+                    
+                    {/* {Auth.loggedIn() && (
+                      <Button
+                        disabled={savedGameIds?.some((savedGameId) => savedGameId === game.id)}
+                        className='btn-block btn-info'
+                        onClick={() => handleSaveGame(game.id)}>
+                        {savedGameIds?.some((savedGameId) => savedGameId === game.id)
+                          ? 'This book has already been saved!'
+                          : 'Save this Book!'}
+                      </Button>
+                    )} */}
+                  </Card.Body>
+                </Card>
+              </Col>
+            );
+            
+          }
+          
         })}
       </div>
     </div>
