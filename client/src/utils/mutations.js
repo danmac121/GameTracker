@@ -1,77 +1,122 @@
-import { gql } from '@apollo/client';
-
-export const LOGIN_USER = gql`
-  mutation login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      token
-      user {
-        _id
-        username
-      }
-    }
-  }
-`;
+import {gql} from '@apollo/client'
 
 export const ADD_USER = gql`
-  mutation addUser($username: String!, $email: String!, $password: String!) {
-    addUser(username: $username, email: $email, password: $password) {
-      token
-      user {
-        _id
-        username
-      }
-    }
-  }
-`;
-
-// export const SAVE_BOOK = gql`
-//   mutation saveBook($savedData: SavedBookInput!) {
-//       savedData: $SavedBookInput
-//       user {
-//       _id
-//       username
-//       bookCount
-//       savedBooks
-//     }
-//   }
-// `
-
-export const SAVE_BOOK = gql`
-mutation saveBook($savedData: SavedBookInput!) {
-  saveBook(savedData: $savedData) {
-    _id
-    bookCount
-    email
-    password
-    username
-    savedBooks {
-      title
-      link
-      image
-      description
-      bookId
-      authors
+    mutation addUser($username: String!, $email: String!, $password: String!) {
+  addUser(username: $username, email: $email, password: $password) {
+    token
+    user {
+       username
       _id
     }
   }
 }
 `
 
-export const REMOVE_BOOK = gql`
- mutation Mutation($bookId: ID!) {
-  removeBook(bookId: $bookId) {
-    _id
-    username
-    savedBooks {
-      title
-      link
-      image
-      description
-      bookId
-      authors
+export const LOGIN_USER = gql`
+mutation login($email: String!, $password: String!) {
+  login(email: $email, password: $password) {
+    token
+    user {
+      _id
+      username
     }
-    email
-    bookCount
   }
 }
 `;
+
+export const ADD_PLATFORM = gql`
+mutation AddPlatform($platform: String!) {
+  addPlatform(platform: $platform) {
+    _id
+    username
+    email
+    password
+    gameCount
+    platforms
+    savedGames {
+      _id
+      gameId
+      title
+      description
+      image
+      genre
+      gameplayStatus
+      releaseDate
+      platform
+      completionTasks
+    }
+  }
+}
+`
+export const ADD_GAME = gql`
+mutation SavedGames($gameData: GameInput!) {
+  savedGames(gameData: $gameData) {
+    _id
+    username
+    email
+    password
+    gameCount
+    platforms
+    savedGames {
+      _id
+      gameId
+      title
+      description
+      image
+      genre
+      gameplayStatus
+      releaseDate
+      platform
+      completionTasks
+    }
+  }
+}
+`
+
+export const REMOVE_GAME = gql`
+mutation RemoveGame($gameId: ID!) {
+  removeGame(gameId: $gameId) {
+    _id
+    username
+    email
+    password
+    gameCount
+    platforms
+    savedGames {
+      _id
+      gameId
+      title
+      description
+      image
+      genre
+      gameplayStatus
+      releaseDate
+      platform
+      completionTasks
+    }
+  }
+}
+`
+
+export const ADD_TASK = gql`
+
+mutation Mutation($gameId: Int!, $completionTasks: [String]) {
+  addTask(gameId: $gameId, completionTasks: $completionTasks) {
+    savedGames {
+      gameId
+      title
+      description
+      completionTasks
+      _id
+      image
+      genre
+      gameplayStatus
+      releaseDate
+      platform
+    }
+  }
+}
+
+
+
+`

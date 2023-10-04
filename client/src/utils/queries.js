@@ -1,19 +1,26 @@
-import { gql } from '@apollo/client';
+import {gql} from '@apollo/client'
 
-export const QUERY_ME = gql`
- query me {
+export const GET_ME = gql`
+    {
   me {
     _id
-    bookCount
-    savedBooks {
+    username
+    email
+    gameCount
+    platforms
+    savedGames {
       _id
-      authors
-      bookId
+      gameId
       description
-      image
-      link
       title
+      image
+      genre
+      gameplayStatus
+      releaseDate
+      platform
+      completionTasks
     }
   }
 }
-`;
+
+`
