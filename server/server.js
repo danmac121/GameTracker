@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const db = require('./config/connection');
@@ -5,14 +6,23 @@ const { ApolloServer } = require('@apollo/server');
 const { expressMiddleware } = require('@apollo/server/express4');
 const { typeDefs, resolvers } = require('./schemas');
 const { authMiddleware } = require('./utils/auth');
+const {searchGames} = require('./routes/api/gameSearch');
 
-
+console.log(process.env)
 const app = express();
 const PORT = process.env.PORT || 3001;
 const server = new ApolloServer({
   typeDefs,
   resolvers,
 });
+
+app.get('/api/search', async (req, res) => {
+  console.log("hit")
+  const searchTerm = req.query.q;  
+  const data = await searchGames(searchTerm);  
+  res.json(data);
+});
+
 const startApolloServer = async () => {
   await server.start();
   

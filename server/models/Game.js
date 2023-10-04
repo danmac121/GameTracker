@@ -4,16 +4,16 @@ const { Schema, model } = require('mongoose');
 
 const gameSchema = new Schema({
 
-  title: {
+  name: {
       type: String,
       required: true,
   },
   // saved book id from GB API
   gameId: {
-    type: Number,
+    type: String,
     required: true,
   },
-    description: {
+    deck: {
       type: String,
     },
   image: {
@@ -29,13 +29,18 @@ const gameSchema = new Schema({
     type: Date,
   },
   platform: {
-    type: String,
+    type: Array,
   },
   completionTasks: {
     type:[String],
 },
 });
 
-
+const Platforms = new Schema({
+  name: {
+    type: String,
+  }
+})
 
 module.exports = gameSchema;
+module.exports = Platforms;

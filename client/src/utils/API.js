@@ -18,6 +18,15 @@ export const createUser = (userData) => {
   });
 };
 
+export const searchGames = (query) => {
+  return fetch(`/api/games/${query}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+};
+
 export const loginUser = (userData) => {
   return fetch('/api/users/login', {
     method: 'POST',
@@ -50,8 +59,4 @@ export const deleteBook = (bookId, token) => {
   });
 };
 
-// make a search to google books api
-// https://www.googleapis.com/books/v1/volumes?q=harry+potter
-export const searchGoogleBooks = (query) => {
-  return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
-};
+
