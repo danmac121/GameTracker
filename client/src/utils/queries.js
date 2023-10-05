@@ -1,23 +1,17 @@
 import {gql} from '@apollo/client'
 
 export const GET_ME = gql`
-    {
+   query Me {
   me {
-    _id
     username
-    email
-    gameCount
-    platforms
     savedGames {
       _id
       gameId
-      description
-      title
+      name
+      deck
       image
-      genre
       gameplayStatus
       releaseDate
-      platform
       completionTasks
     }
   }
