@@ -24,6 +24,7 @@ const gameSchema = new Schema({
   },
   gameplayStatus: {
     type: String,
+    default: 'in progress'
   },
   releaseDate: {
     type: Date,

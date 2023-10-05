@@ -8,6 +8,7 @@ import {
 } from 'react-bootstrap';
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
+import { UPDATE_STATUS } from "../utils/mutations"; 
 
 
 const Games = () => {
@@ -15,11 +16,17 @@ const Games = () => {
   const { loading, data } = useQuery(GET_ME);
   const userData = data?.me || { savedGames: [] }
 
-  console.log(userData.savedGames)
   //filter userData array based on status in database
-  const inProgressGames = userData.savedGames.filter(game => game.gameplayStatus === 'In progress')
+  const inProgressGames = userData.savedGames.filter(game => game.gameplayStatus === 'in progress')
   const nextUpGames = userData.savedGames.filter(game => game.gameplayStatus === 'next up')
   const completedGames = userData.savedGames.filter(game => game.gameplayStatus === 'completed')
+
+  
+console.log(userData)
+
+  function handleClick(event, _id) {
+    console.log(event.target, gameId )
+  }
 
 
   return (
@@ -34,7 +41,7 @@ const Games = () => {
             <ul className="list-group list-group-flush">
               {inProgressGames.map((game) => {
                 return (
-                  <li className="list-group-item">{game.name}</li>
+                  <li key={game._id} className="list-group-item" onClick={()=> handleClick(event, game._id)}>{game.name}</li>
                 )
               })}
             </ul>
