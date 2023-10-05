@@ -128,8 +128,18 @@ const resolvers = {
       throw AuthenticationError;
 
     },
-    
-
+    //update the gameplay status
+    updateStatus: async (parent, {gameId, newStatus}, context) => {
+      if (context.user) {
+        const user = await User.findOneAndUpdate(
+          {_id:context.user._id,
+            'savedGames.gameId': gameId},
+          {$set: {'savedGames.$.gameplayStatus': newStatus}},
+          {new: true}
+        )
+        return user
+      }
+    },
 
 
     //remove a game from savedbooks

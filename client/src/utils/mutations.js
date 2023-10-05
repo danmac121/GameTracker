@@ -129,8 +129,16 @@ mutation Mutation($gameId: Int!, $taskCompleted: String!) {
       name
     }
   }
-}
+}`
 
-
-
-`
+export const UPDATE_STATUS = gql`
+mutation Mutation($gameId: Int!, $newStatus: String!) {
+  updateStatus(gameId: $gameId, newStatus: $newStatus) {
+    username
+    savedGames {
+      name
+      gameplayStatus
+    }
+    gameCount
+  }
+}`

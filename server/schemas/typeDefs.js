@@ -67,6 +67,7 @@ type User {
     addTask(gameId: Int!, completionTasks: [String]): User
     removeTask(gameId: Int!, taskCompleted: String!): User
     removeGame(gameId: ID!): User
+    updateStatus(gameId: Int!, newStatus: String!): User
 
   }
 `;
