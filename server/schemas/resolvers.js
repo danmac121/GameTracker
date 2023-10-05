@@ -33,6 +33,11 @@ const resolvers = {
         console.log(games);
         return games;
   },
+    getUserSavedGames: async (_, __, context) => {
+      const userId = context.user._id
+      const savedGames = await User.find({ _id: userId })
+      return savedGames;
+    },
   },
   Mutation: {
     //create a new user and sign a token for that user

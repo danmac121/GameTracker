@@ -14,6 +14,7 @@ enum GameplayStatus {
 }
 
 
+
 type User {
     _id: ID
     username: String!
@@ -24,6 +25,14 @@ type User {
     savedGames: [Game]
   }
 
+  input PlatformsInput {
+    name: String!
+  }
+
+  type Platforms {
+    name: String!
+  }
+
   input GameInput {
     _id: ID
     gameId: Int
@@ -32,7 +41,7 @@ type User {
     image: String
     gameplayStatus: String
     releaseDate: String
-    platform: String
+    platforms: [PlatformsInput]
     completionTasks: [String]
   }
 
@@ -44,18 +53,17 @@ type User {
     image: String
     gameplayStatus: String
     releaseDate: String
-    platforms: [Platforms]!
+    platforms: [Platforms]
     completionTasks: [String]
   }
-  type Platforms {
-    name: String!
-  }
+
   type Query {
     searchGames(query: String!): [Game]
   }
 
   type Query {
     me: User
+    getUserSavedGames: [Game]
   }
 
   type Mutation {

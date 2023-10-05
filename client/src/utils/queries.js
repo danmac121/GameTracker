@@ -39,3 +39,11 @@ query searchGames($query: String!) {
 }
 `;
 
+export const GET_USER_SAVED_GAMES = gql`
+  query GetUserSavedGames {
+   me {
+      savedGames{
+      gameId}
+    }
+  }
+`;

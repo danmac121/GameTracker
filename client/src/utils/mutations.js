@@ -39,10 +39,10 @@ mutation AddPlatform($platform: String!) {
       name
       description
       image
-      genre
+     
       gameplayStatus
       releaseDate
-      platform
+      platforms
       completionTasks
     }
   }
@@ -61,12 +61,13 @@ mutation SavedGames($gameData: GameInput!) {
       _id
       gameId
       name
-      description
+      deck
       image
-      genre
       gameplayStatus
       releaseDate
-      platform
+      platforms{
+      name
+    }
       completionTasks
     }
   }
