@@ -18,6 +18,7 @@
   "dependencies": {
     "@apollo/client": "^3.8.4",
     "@apollo/server": "^4.9.3",
+    "dayjs": "^1.11.10",
     "dotenv": "^16.3.1"
   }
 }

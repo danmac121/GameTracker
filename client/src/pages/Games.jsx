@@ -11,6 +11,7 @@ import {
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
 import { UPDATE_STATUS } from "../utils/mutations"; 
+import formatDate from '../utils/dateFormat'
 
 
 const Games = () => {
@@ -42,8 +43,35 @@ console.log(userData)
             <h2 className="bg-dark text-light text-center">In progress</h2>
             <ul className="list-group list-group-flush">
               {inProgressGames.map((game) => {
+                console.log("logging game", game)
+                console.log("logging release", game.releaseDate)
                 return (
-                  <li key={game._id} className="list-group-item" onClick={()=> handleClick(event, game._id)}>{game.name}</li>
+                  <Col md="4" key={game._id}>
+                  <Card border='dark'>
+                    
+                    
+                    <Card.Img src={game.image} alt={`The cover for ${game.name}`} variant='top' />
+    
+                    <Card.Body>
+                      <Card.Title className = "gameName">{game.name}</Card.Title>
+                     
+                      <Card.Text>{game.deck} </Card.Text>
+                      <Card.Text>Platforms: {game.platforms ? game.platforms.map(platform => platform.name).join(', ') : 'No platforms available'} </Card.Text>
+                      <Card.Text>Released: {formatDate(game.releaseDate)} </Card.Text>
+                        <Button>                         
+                          Send to Next Up                           
+                        </Button>
+                        <Button>                         
+                          Send to Completed                           
+                        </Button>                     
+                        <Button>                         
+                          See your todos!                           
+                        </Button>
+                     
+                     
+                    </Card.Body>
+                  </Card>
+                </Col>
                 )
               })}
             </ul>
