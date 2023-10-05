@@ -61,6 +61,7 @@ type User {
     searchGames(query: String!): [Game]
   }
 
+
   type Query {
     me: User
     getUserSavedGames: [Game]
@@ -72,6 +73,7 @@ type User {
     addPlatform(platform:String!): User
     savedGames(gameData: GameInput!): User
     addTask(gameId: Int!, completionTasks: [String]): User
+    removeTask(gameId: Int!, taskCompleted: String!): User
     removeGame(gameId: ID!): User
     updateStatus(gameId: Int!, newStatus: String!): User
 
