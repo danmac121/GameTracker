@@ -24,12 +24,38 @@ const Games = () => {
   const nextUpGames = userData.savedGames.filter(game => game.gameplayStatus === 'next up')
   const completedGames = userData.savedGames.filter(game => game.gameplayStatus === 'completed')
 
-  
+  const [updateStatus, {error}] = useMutation(UPDATE_STATUS)
+
 console.log(userData)
 
-  function handleClick(event, _id) {
-    console.log(event.target, gameId )
+  function handleClick (event, gameId, gameplayStatus) {
+    console.log(event.target, gameId, gameplayStatus)
   }
+
+  const handleComplete = async (event, gameId) => {
+    console.log(event.target, gameId )
+    const {data} = await updateStatus({
+      variables: {gameId, newStatus: 'completed'},
+      refetchQueries: [GET_ME]
+    })
+  }
+
+  const handleInProgress = async (event, gameId) => {
+    console.log(event.target, gameId )
+    const {data} = await updateStatus({
+      variables: {gameId, newStatus: 'in progress'},
+      refetchQueries: [GET_ME]
+    })
+  }
+
+  const handleNextUp = async (event, gameId) => {
+    console.log(event.target, gameId )
+    const {data} = await updateStatus({
+      variables: {gameId, newStatus: 'next up'},
+      refetchQueries: [GET_ME]
+    })
+  }
+
 
 
   return (
@@ -58,20 +84,16 @@ console.log(userData)
                       <Card.Text>{game.deck} </Card.Text>
                       <Card.Text>Platforms: {game.platforms ? game.platforms.map(platform => platform.name).join(', ') : 'No platforms available'} </Card.Text>
                       <Card.Text>Released: {formatDate(game.releaseDate)} </Card.Text>
-                        <Button>                         
-                          Send to Next Up                           
-                        </Button>
-                        <Button>                         
-                          Send to Completed                           
-                        </Button>                     
-                        <Button>                         
-                          See your todos!                           
-                        </Button>
-                     
+                       
+                  <button onClick={()=> handleComplete(event, game.gameId)}>Complete</button>
+                  <button onClick={()=> handleNextUp(event, game.gameId)}>Next Up</button>
                      
                     </Card.Body>
                   </Card>
                 </Col>
+                  
+             
+                 
                 )
               })}
             </ul>
@@ -82,7 +104,11 @@ console.log(userData)
             <ul className="list-group list-group-flush">
               {nextUpGames.map((game) => {
                 return (
+                  <>
                   <li className="list-group-item">{game.name}</li>
+                  <button onClick={()=> handleComplete(event, game.gameId)}>Complete</button>
+                  <button onClick={()=> handleInProgress(event, game.gameId)}>In progress</button>
+                  </>
                 )
               })}
 
@@ -95,7 +121,29 @@ console.log(userData)
             <ul className="list-group list-group-flush">
               {completedGames.map((game) => {
                 return (
-                  <li className="list-group-item">{game.name}</li>
+                  <Col md="4" key={game._id}>
+                  <Card border='dark'>
+                    
+                    
+                    <Card.Img src={game.image} alt={`The cover for ${game.name}`} variant='top' />
+    
+                    <Card.Body>
+                      <Card.Title className = "gameName">{game.name}</Card.Title>
+                     
+                      <Card.Text>{game.deck} </Card.Text>
+                      <Card.Text>Platforms: {game.platforms ? game.platforms.map(platform => platform.name).join(', ') : 'No platforms available'} </Card.Text>
+                      <Card.Text>Released: {formatDate(game.releaseDate)} </Card.Text>
+                       
+                      <li className="list-group-item">{game.name}</li>
+                  <button onClick={()=> handleInProgress(event, game.gameId)}>In Progress</button>
+                  <button onClick={()=> handleNextUp(event, game.gameId)}>Next Up</button>
+                  
+                     
+                    </Card.Body>
+                  </Card>
+                </Col>
+                  
+          
                 )
               })}
             </ul>
