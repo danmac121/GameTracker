@@ -29,7 +29,7 @@ const gameSchema = new Schema({
   releaseDate: {
     type: Date,
   },
-  platform: {
+  platforms: {
     type: Array,
   },
   completionTasks: {

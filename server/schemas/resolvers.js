@@ -33,9 +33,17 @@ const resolvers = {
         console.log(games);
         return games;
   },
+<<<<<<< HEAD
+    getUserSavedGames: async (_, __, context) => {
+      const userId = context.user._id
+      const savedGames = await User.find({ _id: userId })
+      return savedGames;
+    },
+=======
 
     
 
+>>>>>>> ca40be3a8340badeea3ef3cb05f3c6d60993715c
   },
 
   Mutation: {
