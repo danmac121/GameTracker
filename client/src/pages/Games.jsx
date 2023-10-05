@@ -1,5 +1,5 @@
 import Auth from "../utils/auth";
-import Tasks from '../components/Tasks'
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import {
   Container,
@@ -43,7 +43,9 @@ console.log(userData)
             <ul className="list-group list-group-flush">
               {inProgressGames.map((game) => {
                 return (
-                  <li key={game._id} className="list-group-item" onClick={()=> handleClick(event, game._id)}>{game.name}</li>
+                  <li key={game._id} className="list-group-item">
+                      <Link to={`/single/${game._id}`}>{game.name}</Link>
+                 </li>
                 )
               })}
             </ul>
@@ -80,7 +82,6 @@ console.log(userData)
           <h4 className="bg-dark text-light text-center">Upcoming</h4>
         </Col>
       </Container>
-      <Tasks />
     </>
 
   )

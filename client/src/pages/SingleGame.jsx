@@ -1,4 +1,5 @@
 import Auth from "../utils/auth";
+import Tasks from '../components/Tasks'
 import {
     Container,
     Card,
@@ -28,6 +29,7 @@ const SingleGame = () => {
               <li className="list-group-item">Porta ac consectetur ac</li>
               <li className="list-group-item">Vestibulum at eros</li>
             </ul>
+        <Tasks />
         <Button>Add to-do</Button>
         <Button>Edit to-dos</Button>
         </Col>
