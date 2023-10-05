@@ -37,7 +37,7 @@ mutation AddPlatform($platform: String!) {
       _id
       gameId
       name
-      description
+      deck
       image
       genre
       gameplayStatus
@@ -61,7 +61,7 @@ mutation SavedGames($gameData: GameInput!) {
       _id
       gameId
       name
-      description
+      deck
       image
       genre
       gameplayStatus
@@ -86,7 +86,7 @@ mutation RemoveGame($gameId: ID!) {
       _id
       gameId
       name
-      description
+      deck
       image
       genre
       gameplayStatus
@@ -105,14 +105,28 @@ mutation Mutation($gameId: Int!, $completionTasks: [String]) {
     savedGames {
       gameId
       name
-      description
+      deck
       completionTasks
       _id
       image
-      genre
       gameplayStatus
       releaseDate
-      platform
+    }
+  }
+}
+`
+
+export const REMOVE_TASK = gql`
+
+mutation Mutation($gameId: Int!, $taskCompleted: String!) {
+  removeTask(gameId: $gameId, taskCompleted: $taskCompleted) {
+    _id
+    savedGames {
+      completionTasks
+      _id
+      gameId
+      deck
+      name
     }
   }
 }
