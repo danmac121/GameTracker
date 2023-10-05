@@ -7,11 +7,13 @@ export const GET_ME = gql`
     savedGames {
       _id
       gameId
-      name
       deck
+      name
       image
+      
       gameplayStatus
       releaseDate
+    
       completionTasks
     }
   }
@@ -31,5 +33,4 @@ query searchGames($query: String!) {
     }
   }
 }
-`;
-
+`

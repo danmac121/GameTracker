@@ -33,7 +33,11 @@ const resolvers = {
         console.log(games);
         return games;
   },
+
+    
+
   },
+
   Mutation: {
     //create a new user and sign a token for that user
     addUser: async (parent, { username, email, password }) => {
@@ -107,11 +111,10 @@ const resolvers = {
     },
 
 
+
     //add a game to the User's 'Games' page
 
     savedGames: async (parent, { gameData }, context) => {
-      console.log(gameData)
-      console.log(context.user)
       if (context.user) {
 
         const update = await User.findOneAndUpdate(
@@ -153,8 +156,37 @@ const resolvers = {
         return removeGame;
       }
       throw AuthenticationError;
-    }
-  },
-};
+    },
+  
+    removeTask: async (parent, { gameId, taskCompleted }, context) => {
+
+      if (context.user) {
+        console.log(gameId, taskCompleted)
+  
+        const update = await User.findOneAndUpdate(
+  
+          {
+            _id: context.user._id,
+            "savedGames.gameId": gameId
+          },
+          {
+            $pull: {
+              "savedGames.$.completionTasks": taskCompleted
+            }
+          },
+          {},
+          { new: true }
+        ).populate('savedGames')
+
+        // console.log(update.savedGames, completionTasks)
+        return update;
+  
+      }
+      throw AuthenticationError;
+  
+    },
+
+},
+}
 
 module.exports = resolvers;

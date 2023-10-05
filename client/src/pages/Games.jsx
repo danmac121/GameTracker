@@ -1,4 +1,6 @@
 import Auth from "../utils/auth";
+import Tasks from '../components/Tasks'
+import { useState } from 'react';
 import {
   Container,
   Card,
@@ -78,17 +80,12 @@ console.log(userData)
           <h4 className="bg-dark text-light text-center">Upcoming</h4>
         </Col>
       </Container>
+      <Tasks />
     </>
 
   )
 
 }
-
-
-
-
-
-
 
 
 export default Games
