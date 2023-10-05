@@ -23,12 +23,38 @@ const Games = () => {
   const nextUpGames = userData.savedGames.filter(game => game.gameplayStatus === 'next up')
   const completedGames = userData.savedGames.filter(game => game.gameplayStatus === 'completed')
 
-  
+  const [updateStatus, {error}] = useMutation(UPDATE_STATUS)
+
 console.log(userData)
 
-  function handleClick(event, _id) {
-    console.log(event.target, gameId )
+  function handleClick (event, gameId, gameplayStatus) {
+    console.log(event.target, gameId, gameplayStatus)
   }
+
+  const handleComplete = async (event, gameId) => {
+    console.log(event.target, gameId )
+    const {data} = await updateStatus({
+      variables: {gameId, newStatus: 'completed'},
+      refetchQueries: [GET_ME]
+    })
+  }
+
+  const handleInProgress = async (event, gameId) => {
+    console.log(event.target, gameId )
+    const {data} = await updateStatus({
+      variables: {gameId, newStatus: 'in progress'},
+      refetchQueries: [GET_ME]
+    })
+  }
+
+  const handleNextUp = async (event, gameId) => {
+    console.log(event.target, gameId )
+    const {data} = await updateStatus({
+      variables: {gameId, newStatus: 'next up'},
+      refetchQueries: [GET_ME]
+    })
+  }
+
 
 
   return (
@@ -43,9 +69,11 @@ console.log(userData)
             <ul className="list-group list-group-flush">
               {inProgressGames.map((game) => {
                 return (
-                  <li key={game._id} className="list-group-item">
-                      <Link to={`/single/${game._id}`}>{game.name}</Link>
-                 </li>
+                  <>
+                  <li key={game.gameId} className="list-group-item" onClick={()=> handleClick(event, game.gameId, game.gameplayStatus)}>{game.name}</li>
+                  <button onClick={()=> handleComplete(event, game.gameId)}>Complete</button>
+                  <button onClick={()=> handleNextUp(event, game.gameId)}>Next Up</button>
+                  </>
                 )
               })}
             </ul>
@@ -56,7 +84,11 @@ console.log(userData)
             <ul className="list-group list-group-flush">
               {nextUpGames.map((game) => {
                 return (
+                  <>
                   <li className="list-group-item">{game.name}</li>
+                  <button onClick={()=> handleComplete(event, game.gameId)}>Complete</button>
+                  <button onClick={()=> handleInProgress(event, game.gameId)}>In progress</button>
+                  </>
                 )
               })}
 
@@ -69,7 +101,11 @@ console.log(userData)
             <ul className="list-group list-group-flush">
               {completedGames.map((game) => {
                 return (
+                  <>
                   <li className="list-group-item">{game.name}</li>
+                  <button onClick={()=> handleInProgress(event, game.gameId)}>In Progress</button>
+                  <button onClick={()=> handleNextUp(event, game.gameId)}>Next Up</button>
+                  </>
                 )
               })}
             </ul>
