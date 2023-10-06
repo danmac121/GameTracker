@@ -35,6 +35,9 @@ const gameSchema = new Schema({
   completionTasks: {
     type:[String],
 },
+  accolades: {
+    type: [String],
+  }
 });
 
 const Platforms = new Schema({

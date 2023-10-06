@@ -20,10 +20,11 @@ function Tasks() {
     //retrieves single game ID
     const [game] = user.savedGames.filter(game => game._id === gameId )
 
+    console.log("GAME", game)
 
     const addTask = (task) => {
         const newTask = {
-            id: Math.random(),
+            id: Math.floor(Math.random()*1000),
             task: task,
             completed: false,
         };
@@ -32,11 +33,11 @@ function Tasks() {
         addTaskMutation({
             variables: {
                 gameId: game.gameId,
-                completionTasks: [...list, newTask].map((task) => task.task),
+                completionTasks: [...game.completionTasks, newTask.task]
             },
         });
 
-        setList([...list, newTask]);
+        setList([...game.completionTasks, newTask]);
         setInput('');
     };
 

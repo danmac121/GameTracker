@@ -79,7 +79,9 @@ console.log(userData)
                     <Card.Img src={game.image} alt={`The cover for ${game.name}`} variant='top' />
     
                     <Card.Body>
-                      <Card.Title className = "gameName">{game.name}</Card.Title>
+                      <Card.Title className = "gameName">
+                      <Link to={`/single/${game._id}`}>{game.name}</Link>
+                      </Card.Title>
                      
                       <Card.Text>{game.deck} </Card.Text>
                       <Card.Text>Platforms: {game.platforms ? game.platforms.map(platform => platform.name).join(', ') : 'No platforms available'} </Card.Text>

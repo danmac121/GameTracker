@@ -175,6 +175,10 @@ const resolvers = {
             $pull: {
               "savedGames.$.completionTasks": taskCompleted
             }
+          },  {
+            $push: {
+              "savedGames.$.accolades": taskCompleted
+            }
           },
           { new: true }
         ).populate('savedGames')
