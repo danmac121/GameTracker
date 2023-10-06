@@ -20,6 +20,7 @@ const SingleGame = () => {
 
   const gameData = userData.savedGames || []
 
+  //isolaties individual game by _id/parameter 
   const thisGameData = gameData.find((game) => game._id === gameId) 
 
 

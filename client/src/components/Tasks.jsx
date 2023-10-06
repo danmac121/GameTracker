@@ -5,6 +5,7 @@ import { GET_ME } from '../utils/queries'
 import { useQuery } from '@apollo/client';
 import { useParams } from 'react-router-dom';
 
+
 function Tasks() {
     const [list, setList] = useState([]);
     const [input, setInput] = useState('');
@@ -16,9 +17,8 @@ function Tasks() {
 
     const user = data?.me || {savedGames: []};
 
+    //retrieves single game ID
     const [game] = user.savedGames.filter(game => game._id === gameId )
-
-    console.log("!!!", game)
 
 
     const addTask = (task) => {
@@ -28,7 +28,7 @@ function Tasks() {
             completed: false,
         };
 
-
+        //adds task to completionTasks array
         addTaskMutation({
             variables: {
                 gameId: game.gameId,
@@ -40,7 +40,7 @@ function Tasks() {
         setInput('');
     };
 
-
+    //removes task from completionTasks array
     const removeTask = (gameId, task) => {
         removeTaskMutation({
           variables: {
@@ -50,7 +50,6 @@ function Tasks() {
           refetchQueries: [{ query: GET_ME }],
         });
       };
-
 
 
     return (
@@ -65,8 +64,6 @@ function Tasks() {
             <div>
                 <ul>
                     {game.completionTasks.map((task, index) => {
-                        console.log(task.completed)
-                        console.log(task)
                         return (
                             <li>
                                 {task}
