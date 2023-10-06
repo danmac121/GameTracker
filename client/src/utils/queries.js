@@ -13,7 +13,9 @@ export const GET_ME = gql`
       
       gameplayStatus
       releaseDate
-    
+      platforms {
+        name
+      }
       completionTasks
     }
   }

@@ -27,7 +27,7 @@ const gameSchema = new Schema({
     default: 'in progress'
   },
   releaseDate: {
-    type: Date,
+    type: String,
   },
   platforms: {
     type: Array,
