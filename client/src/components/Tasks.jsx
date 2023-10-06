@@ -3,20 +3,22 @@ import { useMutation } from '@apollo/client';
 import { ADD_TASK, REMOVE_TASK } from '../utils/mutations'
 import { GET_ME } from '../utils/queries'
 import { useQuery } from '@apollo/client';
+import { useParams } from 'react-router-dom';
 
 function Tasks() {
     const [list, setList] = useState([]);
     const [input, setInput] = useState('');
-
     const [addTaskMutation] = useMutation(ADD_TASK);
     const [removeTaskMutation, {error}] = useMutation(REMOVE_TASK);
     const { loading, data } = useQuery(GET_ME);
-
-    console.log(data, "test")
-    console.log(data?.me.savedGames[0].completionTasks)
+    const { gameId } = useParams();
 
 
-    const user = data?.me;
+    const user = data?.me || {savedGames: []};
+
+    const [game] = user.savedGames.filter(game => game._id === gameId )
+
+    console.log("!!!", game)
 
 
     const addTask = (task) => {
@@ -29,7 +31,7 @@ function Tasks() {
 
         addTaskMutation({
             variables: {
-                gameId: 5,
+                gameId: game.gameId,
                 completionTasks: [...list, newTask].map((task) => task.task),
             },
         });
@@ -62,13 +64,13 @@ function Tasks() {
             <button onClick={() => addTask(input)}>Add Task</button>
             <div>
                 <ul>
-                    {user?.savedGames[0].completionTasks.map((task, index) => {
+                    {game.completionTasks.map((task, index) => {
                         console.log(task.completed)
                         console.log(task)
                         return (
-                            <li key={index}>
+                            <li>
                                 {task}
-                                <button onClick={() => removeTask(user.savedGames[0].gameId, task)}>Done!</button>
+                                <button onClick={() => removeTask(game.gameId, task)}>Done!</button>
                             </li>
                         )
                     })}
