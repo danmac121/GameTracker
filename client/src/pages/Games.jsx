@@ -83,7 +83,7 @@ console.log(userData)
                      
                       <Card.Text>{game.deck} </Card.Text>
                       <Card.Text>Platforms: {game.platforms ? game.platforms.map(platform => platform.name).join(', ') : 'No platforms available'} </Card.Text>
-                      <Card.Text>Released: {formatDate(game.releaseDate)} </Card.Text>
+                      <Card.Text>Released: {  formatDate(game.releaseDate)} </Card.Text>
                        
                   <button onClick={()=> handleComplete(event, game.gameId)}>Complete</button>
                   <button onClick={()=> handleNextUp(event, game.gameId)}>Next Up</button>
@@ -103,12 +103,28 @@ console.log(userData)
             <h2 className="bg-dark text-light text-center">Next Up</h2>
             <ul className="list-group list-group-flush">
               {nextUpGames.map((game) => {
-                return (
-                  <>
-                  <li className="list-group-item">{game.name}</li>
+                return ( <Col md="4" key={game._id}>
+                <Card border='dark'>
+                  
+                  
+                  <Card.Img src={game.image} alt={`The cover for ${game.name}`} variant='top' />
+  
+                  <Card.Body>
+                    <Card.Title className = "gameName">{game.name}</Card.Title>
+                   
+                    <Card.Text>{game.deck} </Card.Text>
+                    <Card.Text>Platforms: {game.platforms ? game.platforms.map(platform => platform.name).join(', ') : 'No platforms available'} </Card.Text>
+                    <Card.Text>Released: { formatDate(game.releaseDate)} </Card.Text>
+                     
+                    <li className="list-group-item">{game.name}</li>
                   <button onClick={()=> handleComplete(event, game.gameId)}>Complete</button>
                   <button onClick={()=> handleInProgress(event, game.gameId)}>In progress</button>
-                  </>
+                
+                   
+                  </Card.Body>
+                </Card>
+              </Col>
+                 
                 )
               })}
 
@@ -120,6 +136,7 @@ console.log(userData)
             <h2 className="bg-dark text-light text-center">Completed</h2>
             <ul className="list-group list-group-flush">
               {completedGames.map((game) => {
+                
                 return (
                   <Col md="4" key={game._id}>
                   <Card border='dark'>
@@ -132,7 +149,7 @@ console.log(userData)
                      
                       <Card.Text>{game.deck} </Card.Text>
                       <Card.Text>Platforms: {game.platforms ? game.platforms.map(platform => platform.name).join(', ') : 'No platforms available'} </Card.Text>
-                      <Card.Text>Released: {formatDate(game.releaseDate)} </Card.Text>
+                      <Card.Text>Released: { formatDate(game.releaseDate)} </Card.Text>
                        
                       <li className="list-group-item">{game.name}</li>
                   <button onClick={()=> handleInProgress(event, game.gameId)}>In Progress</button>
