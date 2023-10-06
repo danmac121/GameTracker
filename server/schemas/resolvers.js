@@ -176,7 +176,6 @@ const resolvers = {
               "savedGames.$.completionTasks": taskCompleted
             }
           },
-          {},
           { new: true }
         ).populate('savedGames')
 
