@@ -70,7 +70,9 @@ console.log(userData)
               {inProgressGames.map((game) => {
                 return (
                   <>
-                  <li key={game.gameId} className="list-group-item" onClick={()=> handleClick(event, game.gameId, game.gameplayStatus)}>{game.name}</li>
+                 <li key={game._id} className="list-group-item">
+                      <Link to={`/single/${game._id}`}>{game.name}</Link>
+                 </li>
                   <button onClick={()=> handleComplete(event, game.gameId)}>Complete</button>
                   <button onClick={()=> handleNextUp(event, game.gameId)}>Next Up</button>
                   </>
