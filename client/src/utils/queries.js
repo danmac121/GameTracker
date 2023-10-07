@@ -10,7 +10,7 @@ export const GET_ME = gql`
       deck
       name
       image
-      
+      accolades
       gameplayStatus
       releaseDate
       platforms {
