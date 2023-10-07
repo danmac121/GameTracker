@@ -19,7 +19,7 @@ function Stream() {
 
     return (
         <>
-            {/* while toggle is false hide the player and show a div  */}
+            {/* while toggle is false hide the player and show a placeholder div height/width are hardcoded but can be changed to variable size */}
             {toggle ?   <iframe src={`https://player.kick.com/${stream}`} height="720" width="1280" frameborder="0" scrolling="no" allowfullscreen="true"></iframe> : <div style={divStyle}></div>}
             <br />
             <input

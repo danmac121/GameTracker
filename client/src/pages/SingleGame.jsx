@@ -56,12 +56,8 @@ return <>Loading...</>
           {/* <Button>Add to-do</Button>
           <Button>Edit to-dos</Button> */}
         </Col>
-      </Container>
           <Stream></Stream>
-
-
-
-      {/* <iframe src="https://player.kick.com/"{...stream} height="720" width="1280" frameborder="0" scrolling="no" allowfullscreen="true"></iframe> */}
+      </Container>
 
     </>
 
