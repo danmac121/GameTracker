@@ -41,7 +41,7 @@ function App() {
     <ApolloProvider client={client}>
       <Navbar />
       <Outlet />
-      <SearchGames />
+      
       </ApolloProvider>
     </>
   );

@@ -12,6 +12,7 @@ import { useQuery, useMutation } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
 import { UPDATE_STATUS } from "../utils/mutations"; 
 import formatDate from '../utils/dateFormat'
+import './Games.css'
 
 
 const Games = () => {
@@ -61,34 +62,32 @@ console.log(userData)
   return (
 
     <>
-      <h1 className="bg-dark p-3 text-light text-center">My Games</h1>
-      <Container className="mb-5 mt-3">
+      <h1 className="header text-center">My Games</h1>
+      <Container className="mb-5 mt-3 gameContainer">
         <Row>
 
-          <Col md="4" className="p-3">
-            <h2 className="bg-dark text-light text-center">In progress</h2>
+          <Col sm="12" md="12" lg="4" className="p-3">
+            <h2 className="header text-center">In progress</h2>
             <ul className="list-group list-group-flush">
               {inProgressGames.map((game) => {
                 console.log("logging game", game)
                 console.log("logging release", game.releaseDate)
                 return (
-                  <Col md="4" key={game._id}>
-                  <Card border='dark'>
+                  <Col  key={game._id}>
+                  <Card className="card" border='dark'>
                     
                     
-                    <Card.Img src={game.image} alt={`The cover for ${game.name}`} variant='top' />
+                    <Card.Img className="img" src={game.image} alt={`The cover for ${game.name}`} variant='top' />
     
                     <Card.Body>
-                      <Card.Title className = "gameName">
-                      <Link to={`/single/${game._id}`}>{game.name}</Link>
-                      </Card.Title>
+                      <Card.Title className = "gameName"><Link className = "gameName" to={`/single/${game._id}`}>{game.name}</Link></Card.Title>
                      
                       <Card.Text>{game.deck} </Card.Text>
                       <Card.Text>Platforms: {game.platforms ? game.platforms.map(platform => platform.name).join(', ') : 'No platforms available'} </Card.Text>
                       <Card.Text>Released: {  formatDate(game.releaseDate)} </Card.Text>
                        
-                  <button onClick={()=> handleComplete(event, game.gameId)}>Complete</button>
-                  <button onClick={()=> handleNextUp(event, game.gameId)}>Next Up</button>
+                  <button className="button" onClick={()=> handleComplete(event, game.gameId)}>Complete</button>
+                  <button className="button" onClick={()=> handleNextUp(event, game.gameId)}>Next Up</button>
                      
                     </Card.Body>
                   </Card>
@@ -101,26 +100,26 @@ console.log(userData)
             </ul>
           </Col>
 
-          <Col md="4" className="p-3">
-            <h2 className="bg-dark text-light text-center">Next Up</h2>
+          <Col sm="12" md="12" lg="4" className="p-3">
+            <h2 className="header text-center">Next Up</h2>
             <ul className="list-group list-group-flush">
               {nextUpGames.map((game) => {
-                return ( <Col md="4" key={game._id}>
-                <Card border='dark'>
+                return ( <Col  key={game._id}>
+                <Card className="card" border='dark'>
                   
                   
-                  <Card.Img src={game.image} alt={`The cover for ${game.name}`} variant='top' />
+                  <Card.Img className="img" src={game.image} alt={`The cover for ${game.name}`} variant='top' />
   
                   <Card.Body>
-                    <Card.Title className = "gameName">{game.name}</Card.Title>
+                  <Card.Title className = "gameName"><Link className = "gameName" to={`/single/${game._id}`}>{game.name}</Link></Card.Title>
                    
                     <Card.Text>{game.deck} </Card.Text>
                     <Card.Text>Platforms: {game.platforms ? game.platforms.map(platform => platform.name).join(', ') : 'No platforms available'} </Card.Text>
                     <Card.Text>Released: { formatDate(game.releaseDate)} </Card.Text>
                      
-                    <li className="list-group-item">{game.name}</li>
-                  <button onClick={()=> handleComplete(event, game.gameId)}>Complete</button>
-                  <button onClick={()=> handleInProgress(event, game.gameId)}>In progress</button>
+                    
+                  <button className="button" onClick={()=> handleComplete(event, game.gameId)}>Complete</button>
+                  <button className="button" onClick={()=> handleInProgress(event, game.gameId)}>In progress</button>
                 
                    
                   </Card.Body>
@@ -134,28 +133,28 @@ console.log(userData)
           </Col>
 
 
-          <Col md="4" className="p-3">
-            <h2 className="bg-dark text-light text-center">Completed</h2>
+          <Col sm="12" md="12" lg="4" className="p-3">
+            <h2 className="header text-center">Completed</h2>
             <ul className="list-group list-group-flush">
               {completedGames.map((game) => {
                 
                 return (
-                  <Col md="4" key={game._id}>
-                  <Card border='dark'>
+                  <Col  key={game._id}>
+                  <Card className="card" border='dark'>
                     
                     
-                    <Card.Img src={game.image} alt={`The cover for ${game.name}`} variant='top' />
+                    <Card.Img className="img" src={game.image} alt={`The cover for ${game.name}`} variant='top' />
     
                     <Card.Body>
-                      <Card.Title className = "gameName">{game.name}</Card.Title>
+                    <Card.Title className = "gameName"><Link className = "gameName" to={`/single/${game._id}`}>{game.name}</Link></Card.Title>
                      
                       <Card.Text>{game.deck} </Card.Text>
                       <Card.Text>Platforms: {game.platforms ? game.platforms.map(platform => platform.name).join(', ') : 'No platforms available'} </Card.Text>
                       <Card.Text>Released: { formatDate(game.releaseDate)} </Card.Text>
                        
-                      <li className="list-group-item">{game.name}</li>
-                  <button onClick={()=> handleInProgress(event, game.gameId)}>In Progress</button>
-                  <button onClick={()=> handleNextUp(event, game.gameId)}>Next Up</button>
+                      
+                  <button className="button" onClick={()=> handleInProgress(event, game.gameId)}>In Progress</button>
+                  <button className="button" onClick={()=> handleNextUp(event, game.gameId)}>Next Up</button>
                   
                      
                     </Card.Body>

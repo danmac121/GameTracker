@@ -7,6 +7,9 @@ import { useQuery } from '@apollo/client';
 import { useMutation } from '@apollo/client';
 import { ADD_GAME } from '../utils/mutations';
 import {GET_USER_SAVED_GAMES} from '../utils/queries';
+// import shortPlatforms from '../utils/shortenPlatforms';
+import './SearchPage.css'
+
 
 function SearchGames() {
   const [query, setQuery] = useState('');
@@ -83,9 +86,11 @@ function SearchGames() {
   }
 
   return (
-    <div>
-      <div>
+    <div className="searchContainter">
+      <div className='searchBar'>
+        <h1 className="searchText">Search for your favorite games!</h1>
         <input
+        className="actualBar"
           type="text"
           value={query}
           ref={inputRef}
@@ -96,33 +101,35 @@ function SearchGames() {
         <button onClick={handleSearch}>Search</button>
 
       </div>
-      <div>
+      <div className="searchContainer" >
         {results.map((game) => {
           // console.log("mapping game:", game.gameId)
           return (
-            <Col md="4" key={game.gameId}>
-              <Card border='dark'>
+            <Col key={game.gameId}>
+              <Card border='dark' className="cards">
                 
 
-                <Card.Img src={game.image} alt={`The cover for ${game.name}`} variant='top' />
-
+                <Card.Img className="image" src={game.image} alt={`The cover for ${game.name}` } variant='top' />
+                <div>
                 <Card.Body>
                   <Card.Title>{game.name}</Card.Title>
-                  <Card.Text>{game.gameId}</Card.Text>
+                  
                   <Card.Text>{game.deck} </Card.Text>
-                  <Card.Text> Platforms: {game.platforms.map(platform => platform.name).join(', ')}</Card.Text>
+                  <Card.Text className="platforms"> Platforms: {game.platforms.map(platform => platform.name).join(', ')}</Card.Text>
                   <Card.Text>Released: {game.releaseDate} </Card.Text>
- 
+                  
                   {Auth.loggedIn() && (
                     <Button
                       disabled={savedGameIds.includes(game.gameId)}
-                      className='btn-block btn-info'
+                      id='button'
+                      className='button btn'
                       onClick={() => handleSaveGame(game.gameId)}>
                       Save this game!
                        
                     </Button>
                   )} 
                 </Card.Body>
+                </div>
               </Card>
             </Col>
           );

@@ -1,0 +1,53 @@
+.header{
+    background-color: #3F575E;
+    color: #A8DE02;
+  
+   
+}
+.card{
+    background-color: #3F575E;
+    color: #A8DE02;
+    margin-bottom:30px;
+  
+}
+.button{
+    background-color: #A8DE02;
+    color:  black;
+    border-color: black;
+    margin-right: 10px;
+    border-radius: 10px;
+}
+.gameName{
+    color: white;
+   text-decoration: underline;
+
+
+}
+.gameName:hover{
+    color: #A8DE02;
+}
+
+@media (min-width: 768px) and (max-width: 1200px) {
+   .gameContainer{
+         display: grid;
+         grid-template-columns: 1fr ;
+   }
+  
+}
+
+
+
+
+@media (max-width: 991px) {
+    .card{
+    
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        background-color:#3F575E;
+        color: #A8DE02;
+        max-height: 700px;
+        
+        font-size: 14px;
+       }
+      
+}
