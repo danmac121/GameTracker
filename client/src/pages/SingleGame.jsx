@@ -11,6 +11,8 @@ import {
   Row,
   Col
 } from 'react-bootstrap';
+import { useState } from "react";
+import Stream from "../components/Stream";
 
 const SingleGame = () => {
 
@@ -22,8 +24,6 @@ const SingleGame = () => {
 
   //isolaties individual game by _id/parameter 
   const thisGameData = gameData.find((game) => game._id === gameId) 
-
-
 
   const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -56,6 +56,7 @@ return <>Loading...</>
           {/* <Button>Add to-do</Button>
           <Button>Edit to-dos</Button> */}
         </Col>
+          <Stream></Stream>
       </Container>
 
     </>
