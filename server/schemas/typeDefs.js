@@ -5,16 +5,6 @@ type Auth {
   user: User
 }
 
-
-enum GameplayStatus {
-  IN_QUE
-  CURRENTLY_PLAYING
-  CURRENTLY_COMPLETING
-  COMPLETED
-}
-
-
-
 type User {
     _id: ID
     username: String!
@@ -43,6 +33,7 @@ type User {
     releaseDate: String
     platforms: [PlatformsInput]
     completionTasks: [String]
+    accolades: [String]
   }
 
   type Game {
@@ -55,6 +46,7 @@ type User {
     releaseDate: String
     platforms: [Platforms]
     completionTasks: [String]
+    accolades: [String]
   }
 
   type Query {

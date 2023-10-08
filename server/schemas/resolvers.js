@@ -169,17 +169,21 @@ const resolvers = {
   
           {
             _id: context.user._id,
-            "savedGames.gameId": gameId
+            "savedGames.gameId": gameId,
           },
           {
             $pull: {
               "savedGames.$.completionTasks": taskCompleted
+            },
+            
+            $push: {
+              "savedGames.$.accolades": taskCompleted
             }
           },
           { new: true }
         ).populate('savedGames')
 
-        // console.log(update.savedGames, completionTasks)
+        console.log(update.savedGames, taskCompleted)
         return update;
   
       }
