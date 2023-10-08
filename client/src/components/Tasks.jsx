@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/client';
 import { ADD_TASK, REMOVE_TASK } from '../utils/mutations'
 import { GET_ME } from '../utils/queries'
 import { useQuery } from '@apollo/client';
+import Accolades from './Accolades';
 import { useParams } from 'react-router-dom';
 
 
@@ -20,10 +21,11 @@ function Tasks() {
     //retrieves single game ID
     const [game] = user.savedGames.filter(game => game._id === gameId )
 
+  
 
     const addTask = (task) => {
         const newTask = {
-            id: Math.random(),
+            id: Math.floor(Math.random()*1000),
             task: task,
             completed: false,
         };
@@ -32,11 +34,11 @@ function Tasks() {
         addTaskMutation({
             variables: {
                 gameId: game.gameId,
-                completionTasks: [...list, newTask].map((task) => task.task),
+                completionTasks: [...game.completionTasks, newTask.task]
             },
         });
 
-        setList([...list, newTask]);
+        setList([...game.completionTasks, newTask]);
         setInput('');
     };
 
@@ -51,9 +53,9 @@ function Tasks() {
         });
       };
 
-
-    return (
-        <div>
+      
+      return (
+          <div>
             <h3>Completion Tasks</h3>
             <input
                 type="text"
@@ -73,8 +75,10 @@ function Tasks() {
                     })}
                 </ul>
             </div>
+            <Accolades />
         </div>
-    );
+        
+        );
 }
 
 
