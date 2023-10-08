@@ -1,0 +1,131 @@
+body{background-color: #69A5A4;}
+
+.searchContainer{
+    background-color: #69A5A4;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.searchBar{
+    margin: 40px 40px;
+    position:relative;
+    left: 30%;
+}
+.searchBar button{
+    background-color: #3F575E ;
+    color: white;
+    
+}
+
+.image{
+    width:200px;
+    height: 100%;
+}
+
+.cards{
+    margin: 40px 40px;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    background-color:#3F575E;
+    color: #A8DE02;
+    max-height: 700px;
+    height:575px;
+    font-size: 14px;
+    
+}
+
+#button{
+    background-color: #A8DE02;
+    color:  black;
+    border-color: black;
+}
+#button:hover{
+    background-color: #69A5A4;
+    
+    border-color: black;
+}
+
+.actualBar{
+    width:500px;
+}
+.searchText{
+    margin-bottom:20px;
+}
+
+
+
+
+@media (min-width: 1361px) and (max-width: 1450px) {
+    .searchContainer{
+        background-color: #69A5A4;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+    
+    }
+    .cards{
+        
+        height:800px;
+        font-size: 14px;
+        
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1360px) {
+    .searchContainer{
+        background-color: #69A5A4;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .searchBar{
+        margin: 40px 40px;
+        position:relative;
+        left: 25%;
+    }
+}
+
+
+
+
+
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .searchContainer{
+        background-color: #69A5A4;
+        display: grid;
+        grid-template-columns: 1fr ;
+    }
+    .searchBar{
+        margin: 40px 40px;
+        position:relative;
+        left:10%;
+    }
+    .image{
+        width:350px;
+        height: 100%;
+    }
+    .cards{
+        font-size: 20px;
+    }
+}
+
+
+
+
+@media (max-width: 767px) {
+    .searchContainer{
+        background-color: #69A5A4;
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+    .searchBar{
+        margin: 40px 40px;
+        position:relative;
+        left:5%;
+    }
+    .image{
+        width:350px;
+        height: 100%;
+    }
+    .cards{
+        font-size: 16px;
+    }
+}

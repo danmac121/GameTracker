@@ -1,0 +1,17 @@
+.navbar{
+    background-color: black !important;
+    width:100%;
+}
+
+.NavItem{
+    color:#A8DE02;
+    font-size: 20px;
+    
+}
+.NavItem:hover{
+    color: white;
+}
+.brand{
+    font-size: 32px;
+    margin-left: 40px;
+}
