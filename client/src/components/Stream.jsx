@@ -14,7 +14,6 @@ function Stream() {
     const startStream = () => {
         console.log(toggle)
         setToggle(!toggle)
-        setStream('')
     };
 
     return (
@@ -29,6 +28,7 @@ function Stream() {
                 onChange={(e) => setStream(e.target.value)}
             />
             <button onClick={() => startStream()}>{toggle ? "Change Streamer" : "Start Stream"} </button>
+
         </>
     )
 
