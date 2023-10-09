@@ -1,0 +1,82 @@
+.gameTitle{
+    font-family: 'Barlow', sans-serif;
+}
+
+.singleContainer{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    font-family: 'Barlow', sans-serif;
+}
+
+.game{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+    margin: 1rem;
+    padding: 1rem;
+    border: 2px solid #A8DE02;
+    border-radius: 1rem;
+    background-color: #3F575E;
+    color: #A8DE02;
+    font-family: 'Barlow', sans-serif;
+}
+
+.stream{
+    margin-top: 19px;
+}
+
+.taskList{
+   margin-top:10px;
+   font-size: 20px;
+   list-style-type: decimal;
+   font-family: 'Barlow', sans-serif;
+}
+
+.taskButton {
+    margin-left:10px;
+    background-color: #A8DE02;
+    color:  black;
+    border-color: black;
+    margin-right: 10px;
+    border-radius: 10px;
+    font-family: 'Barlow', sans-serif;
+}
+
+.addTaskButton, .accoladeButton{
+    background-color: #A8DE02;
+    color:  black;
+    font-family: 'Barlow', sans-serif;
+}
+
+.accolades{
+    font-size: 20px;
+    list-style-type: decimal;
+    font-family: 'Barlow', sans-serif;
+}
+
+.accoladeHeader{
+    font-size: 30px;
+    color: #A8DE02;
+    margin-top: 15px;
+    font-family: 'Barlow', sans-serif;
+}
+
+.streamButton{
+    background-color: #3F575E ;
+    color: white;
+    font-family: 'Barlow', sans-serif;
+}
+.gameInfo{
+    font-size: 20px;
+    font-family: 'Barlow', sans-serif;
+}
+.taskHeader{
+    font-family: 'Barlow', sans-serif;
+}
+
+@media (max-width: 1360px) {
+   .singleContainer{
+        display:grid;
+        grid-template-columns: 1fr ;
+   }
+}

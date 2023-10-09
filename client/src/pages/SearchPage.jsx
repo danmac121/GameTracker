@@ -106,7 +106,7 @@ function SearchGames() {
           // console.log("mapping game:", game.gameId)
           return (
             <Col key={game.gameId}>
-              <Card border='dark' className="cards">
+              <Card  className="cards">
                 
 
                 <Card.Img className="image" src={game.image} alt={`The cover for ${game.name}` } variant='top' />
