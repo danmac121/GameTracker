@@ -1,5 +1,8 @@
-body{background-color: #69A5A4;}
+*{
+    font-family: 'Barlow', sans-serif;
+}
 
+body{background-color: #69A5A4;}
 .searchContainer{
     background-color: #69A5A4;
     display: grid;
@@ -9,11 +12,12 @@ body{background-color: #69A5A4;}
     margin: 40px 40px;
     position:relative;
     left: 30%;
+    font-family: 'Barlow', sans-serif;
 }
 .searchBar button{
     background-color: #3F575E ;
     color: white;
-    
+    font-family: 'Barlow', sans-serif;
 }
 
 .image{
@@ -30,7 +34,8 @@ body{background-color: #69A5A4;}
     max-height: 700px;
     height:575px;
     font-size: 14px;
-    
+    border: 2px solid #A8DE02;
+    font-family: 'Barlow', sans-serif;
 }
 
 #button{
@@ -49,6 +54,7 @@ body{background-color: #69A5A4;}
 }
 .searchText{
     margin-bottom:20px;
+    font-family: 'Barlow', sans-serif;
 }
 
 

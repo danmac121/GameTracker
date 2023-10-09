@@ -74,7 +74,7 @@ console.log(userData)
                 console.log("logging release", game.releaseDate)
                 return (
                   <Col  key={game._id}>
-                  <Card className="card" border='dark'>
+                  <Card className="card" >
                     
                     
                     <Card.Img className="img" src={game.image} alt={`The cover for ${game.name}`} variant='top' />
@@ -105,7 +105,7 @@ console.log(userData)
             <ul className="list-group list-group-flush">
               {nextUpGames.map((game) => {
                 return ( <Col  key={game._id}>
-                <Card className="card" border='dark'>
+                <Card className="card" >
                   
                   
                   <Card.Img className="img" src={game.image} alt={`The cover for ${game.name}`} variant='top' />
@@ -140,7 +140,7 @@ console.log(userData)
                 
                 return (
                   <Col  key={game._id}>
-                  <Card className="card" border='dark'>
+                  <Card className="card">
                     
                     
                     <Card.Img className="img" src={game.image} alt={`The cover for ${game.name}`} variant='top' />

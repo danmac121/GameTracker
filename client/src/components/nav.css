@@ -4,9 +4,12 @@
 }
 
 .NavItem{
-    color:#A8DE02;
-    font-size: 20px;
-    
+    color:#7bed7d;
+    font-size: 24px;
+    font-family: 'Barlow', sans-serif;
+}
+.NavItem:active{
+    color: white;
 }
 .NavItem:hover{
     color: white;
@@ -14,4 +17,10 @@
 .brand{
     font-size: 32px;
     margin-left: 40px;
+}
+
+.logo{
+    height:100px;
+   
+    padding-left:20px;
 }

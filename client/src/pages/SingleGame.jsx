@@ -13,6 +13,7 @@ import {
 } from 'react-bootstrap';
 import { useState } from "react";
 import Stream from "../components/Stream";
+import "./SingleGame.css"
 
 const SingleGame = () => {
 
@@ -38,10 +39,12 @@ return <>Loading...</>
 
   return (
     <>
-      <h1 className="bg-dark p-3 text-light text-center">You're Playing: {thisGameData.name}</h1>
+    <div >
+      <h1 className="bg-dark p-3 text-light text-center  gameTitle">You're Playing: {thisGameData.name}</h1>
       <Container className="mb-5 mt-3">
-        <h2 className="bg-dark p-3 text-light text-center"></h2>
-        <Col md="4" className="p-3">
+        
+        <div className="singleContainer">
+       <div className="game">
           {/* <h2 className="bg-dark text-light text-center">To-dos</h2>
           <ul className="list-group list-group-flush">
             <li className="list-group-item">Cras justo odio</li>
@@ -51,14 +54,17 @@ return <>Loading...</>
             <li className="list-group-item">Vestibulum at eros</li>
           </ul> */}
           <Card.Img src={thisGameData.image} alt={`The cover for ${thisGameData.name}`} variant='top' />
-          <Card.Text>{thisGameData.deck} </Card.Text>
+          <Card.Text className="gameInfo" >{thisGameData.deck} </Card.Text>
           <Tasks />
           {/* <Button>Add to-do</Button>
           <Button>Edit to-dos</Button> */}
-        </Col>
+        </div>
+        <div className="stream">
+          
           <Stream></Stream>
+          </div></div>
       </Container>
-
+</div>
     </>
 
   )

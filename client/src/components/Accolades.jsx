@@ -2,7 +2,7 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries'
 import { useParams } from 'react-router-dom';
-
+import "../pages/SingleGame.css"
 
 
 function Accolades() {
@@ -22,16 +22,16 @@ function Accolades() {
 
     return (
         <div>
-            <button onClick={toggleAccolades}>
+            <button className='accoladeButton' onClick={toggleAccolades}>
                 {showAccolades ? 'Hide Accolades' : 'Show Accolades'}
             </button>
             {showAccolades && (
                 <div>
-                    <h3>Accolades</h3>
+                    <h3 className='accoladeHeader'>Accolades</h3>
                     <ul>
                         {game.accolades.map((accolade, index) => {
                             return (
-                                <li>
+                                <li className='accolades'>
                                     {accolade}
                                 </li>
                             )

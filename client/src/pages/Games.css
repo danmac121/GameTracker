@@ -1,14 +1,19 @@
+*{
+    font-family: 'Barlow', sans-serif;
+}
+
 .header{
     background-color: #3F575E;
     color: #A8DE02;
-  
+    font-family: 'Barlow', sans-serif;
    
 }
 .card{
     background-color: #3F575E;
     color: #A8DE02;
     margin-bottom:30px;
-  
+    border: 2px solid #A8DE02;
+    font-family: 'Barlow', sans-serif;
 }
 .button{
     background-color: #A8DE02;
@@ -16,12 +21,13 @@
     border-color: black;
     margin-right: 10px;
     border-radius: 10px;
+    font-family: 'Barlow', sans-serif;
 }
 .gameName{
     color: white;
    text-decoration: underline;
 
-
+   font-family: 'Barlow', sans-serif;
 }
 .gameName:hover{
     color: #A8DE02;

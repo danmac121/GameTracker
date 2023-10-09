@@ -5,6 +5,7 @@ import { GET_ME } from '../utils/queries'
 import { useQuery } from '@apollo/client';
 import Accolades from './Accolades';
 import { useParams } from 'react-router-dom';
+import "../pages/SingleGame.css"
 
 
 function Tasks() {
@@ -56,20 +57,20 @@ function Tasks() {
       
       return (
           <div>
-            <h3>Completion Tasks</h3>
+            <h3 className='taskHeader'>Completion Tasks</h3>
             <input
                 type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
             />
-            <button onClick={() => addTask(input)}>Add Task</button>
+            <button className='addTaskButton' onClick={() => addTask(input)}>Add Task</button>
             <div>
                 <ul>
                     {game.completionTasks.map((task, index) => {
                         return (
-                            <li>
+                            <li className='taskList'>
                                 {task}
-                                <button onClick={() => removeTask(game.gameId, task)}>Done!</button>
+                                <button className='taskButton' onClick={() => removeTask(game.gameId, task)}>Done!</button>
                             </li>
                         )
                     })}

@@ -16,7 +16,7 @@ const AppNavbar = () => {
       <Navbar className='navbar' expand='lg'>
         <Container fluid>
           <Navbar.Brand className='NavItem brand' as={Link} to='/'>
-            GameTracker
+            <img className='logo' src="/logo.png" alt="" />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbar' />
           <Navbar.Collapse id='navbar' className='d-flex flex-row-reverse'>
@@ -30,9 +30,7 @@ const AppNavbar = () => {
                   <Nav.Link className='NavItem' as={Link} to='/games'>
                     Games
                   </Nav.Link>
-                  <Nav.Link className='NavItem' as={Link} to='/profile'>
-                    Profile
-                  </Nav.Link>
+                 
                   <Nav.Link className='NavItem' onClick={Auth.logout}>Logout</Nav.Link>
                 </>
               ) : (
