@@ -7,6 +7,7 @@ import { useQuery } from '@apollo/client';
 import { useMutation } from '@apollo/client';
 import { ADD_GAME } from '../utils/mutations';
 import {GET_USER_SAVED_GAMES} from '../utils/queries';
+import { GET_ME } from '../utils/queries';
 // import shortPlatforms from '../utils/shortenPlatforms';
 import './SearchPage.css'
 
@@ -33,7 +34,7 @@ function SearchGames() {
     console.log("userData", userData);
 
   }, [userData, results]);
-  const [addGame] = useMutation(ADD_GAME);
+  const [addGame] = useMutation(ADD_GAME,  {refetchQueries: [{query:GET_ME}]});
 
   const handleSaveGame = async (gameId) => {
     console.log("gameId before .find", gameId);
@@ -135,8 +136,7 @@ function SearchGames() {
                     </Button>
                    
                   )} 
-                    {console.log("savedGameIds",savedGameIds)}
-                  {showGameSaved && savedGameIds === game.gameId && <span className="gameSavedSpan">Game Saved!</span>}
+                  
                 </Card.Body>
                 </div>
               </Card>

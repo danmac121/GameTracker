@@ -1,6 +1,6 @@
 import Auth from "../utils/auth";
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Container,
   Card,
@@ -20,6 +20,7 @@ const Games = () => {
   const { loading, data } = useQuery(GET_ME);
   const userData = data?.me || { savedGames: [] }
 
+  
   //filter userData array based on status in database
   const inProgressGames = userData.savedGames.filter(game => game.gameplayStatus === 'in progress')
   const nextUpGames = userData.savedGames.filter(game => game.gameplayStatus === 'next up')
@@ -27,14 +28,8 @@ const Games = () => {
 
   const [updateStatus, {error}] = useMutation(UPDATE_STATUS)
 
-console.log(userData)
-
-  function handleClick (event, gameId, gameplayStatus) {
-    console.log(event.target, gameId, gameplayStatus)
-  }
 
   const handleComplete = async (event, gameId) => {
-    console.log(event.target, gameId )
     const {data} = await updateStatus({
       variables: {gameId, newStatus: 'completed'},
       refetchQueries: [GET_ME]
@@ -42,7 +37,6 @@ console.log(userData)
   }
 
   const handleInProgress = async (event, gameId) => {
-    console.log(event.target, gameId )
     const {data} = await updateStatus({
       variables: {gameId, newStatus: 'in progress'},
       refetchQueries: [GET_ME]
@@ -50,7 +44,6 @@ console.log(userData)
   }
 
   const handleNextUp = async (event, gameId) => {
-    console.log(event.target, gameId )
     const {data} = await updateStatus({
       variables: {gameId, newStatus: 'next up'},
       refetchQueries: [GET_ME]
@@ -70,8 +63,6 @@ console.log(userData)
             <h2 className="header text-center">In progress</h2>
             <ul className="list-group list-group-flush">
               {inProgressGames.map((game) => {
-                console.log("logging game", game)
-                console.log("logging release", game.releaseDate)
                 return (
                   <Col  key={game._id}>
                   <Card className="card" >
