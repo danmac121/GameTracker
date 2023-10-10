@@ -169,11 +169,7 @@ console.log(userData)
         </Row>
       </Container>
 
-      <Container>
-        <Col className="p-5">
-          <h4 className="bg-dark text-light text-center">Upcoming</h4>
-        </Col>
-      </Container>
+      
     </>
 
   )
