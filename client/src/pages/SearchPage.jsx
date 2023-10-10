@@ -19,6 +19,7 @@ function SearchGames() {
   const [savedGameIds, setSavedGameIds] = useState([]);
   const {data: userData} = useQuery(GET_USER_SAVED_GAMES);
   const inputRef = useRef(null);
+  const [showGameSaved, setShowGameSaved] = useState(false);
   useEffect(() => {
     if (data && data.searchGames) {
       setResults(data.searchGames);
@@ -64,6 +65,8 @@ function SearchGames() {
             }
           }
         });
+        setShowGameSaved(true);
+        setSavedGameIds(game.gameId);
         console.log(userData.me.savedGames)
         setResults([...results]);
       } catch (err) {
@@ -103,6 +106,7 @@ function SearchGames() {
 
       </div>
       <div className="searchContainer" >
+      {console.log("savedGameIds",savedGameIds)}
         {results.map((game) => {
           // console.log("mapping game:", game.gameId)
           return (
@@ -118,17 +122,21 @@ function SearchGames() {
                   <Card.Text>{game.deck} </Card.Text>
                   <Card.Text className="platforms"> Platforms: {game.platforms.map(platform => platform.name).join(', ')}</Card.Text>
                   <Card.Text>Released: {game.releaseDate} </Card.Text>
-                  
+                  {console.log("savedGameIds",savedGameIds)}
                   {Auth.loggedIn() && (
                     <Button
-                      disabled={savedGameIds.includes(game.gameId)}
-                      id='button'
-                      className='button btn'
-                      onClick={() => handleSaveGame(game.gameId)}>
+                    id='button'
+                    className='button btn'
+                    onClick={() => handleSaveGame(game.gameId)}
+                    disabled={savedGameIds.includes(game.gameId)}
+                    
+                    >
                       Save this game!
                        
                     </Button>
+                   
                   )} 
+                  
                 </Card.Body>
                 </div>
               </Card>

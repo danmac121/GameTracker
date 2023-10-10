@@ -2,7 +2,7 @@ import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../utils/queries'
 import { useParams } from 'react-router-dom';
-import "../pages/SingleGame.css"
+import "./TaskStream.css"
 
 
 function Accolades() {
