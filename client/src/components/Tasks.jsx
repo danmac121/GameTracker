@@ -5,7 +5,7 @@ import { GET_ME } from '../utils/queries'
 import { useQuery } from '@apollo/client';
 import Accolades from './Accolades';
 import { useParams } from 'react-router-dom';
-import "../pages/SingleGame.css"
+import "./TaskStream.css"
 
 
 function Tasks() {
